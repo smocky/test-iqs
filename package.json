@@ -1,0 +1,17 @@
+{
+  "name": "events_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/bolt": "^3.3.0",
+    "async-redis": "^1.1.7",
+    "dotenv": "^10.0.0",
+    "redis": "^3.1.2"
+  }
+}
