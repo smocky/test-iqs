@@ -11,7 +11,7 @@ const app = new App({
     //appToken: process.env.APP_TOKEN,
    // developerMode: true,
     stateSecret: 'my-state-secret',
-    scopes: ['channels:read', 'groups:read', 'channels:manage', 'chat:write', 'commands', 'channels:history'],
+    scopes: ['channels:read', 'groups:read', 'channels:manage', 'chat:write', 'channels:history'],
     installationStore: {
         storeInstallation: async (installation) => {
             // change the line below so it saves to your database
