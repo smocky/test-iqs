@@ -15,10 +15,7 @@ const app = new App({
     signingSecret: process.env.SLACK_SIGNING_SECRET,
     clientId: process.env.SLACK_CLIENT_ID,
     clientSecret: process.env.SLACK_CLIENT_SECRET,
-    appToken: process.env.SLACK_APP_TOKEN,
     authVersion: 'v2',
-    developerMode: true,
-    socketMode: true,
     stateSecret: 'my-state-secret',
     scopes: ['channels:read', 'groups:read', 'channels:manage', 'chat:write', 'channels:history'],
     installerOptions: {
