@@ -26,12 +26,12 @@ const app = new App({
             // change the line below so it saves to your database
             if (installation.isEnterpriseInstall) {
                 // support for org wide app installation
-                console.log('enterprise install');
+                console.log('enterprise install req: ',installation);
                 // return installation;
                 return await database.set(installation.enterprise.id, JSON.stringify(installation));
             } else {
                 // single team app installation
-                console.log('normal install');
+                console.log('normal install req: ',installation);
                 // return installation;
                 return await database.set(installation.team.id, JSON.stringify(installation));
             }
@@ -42,6 +42,7 @@ const app = new App({
             if (installQuery.isEnterpriseInstall && installQuery.enterpriseId !== undefined) {
                 // org wide app installation lookup
                 let result = await database.get(installQuery.enterpriseId);
+                console.log('iq: ',installQuery,'res=',result)
                 if (result) {
                     result = JSON.parse(result);
                     return result;
@@ -50,6 +51,7 @@ const app = new App({
             if (installQuery.teamId !== undefined) {
                 // single team app installation lookup
                 let result = await database.get(installQuery.teamId);
+                console.log('iq: ',installQuery,'res=',result)
                 if (result) {
                     result = JSON.parse(result);
                     return result;
