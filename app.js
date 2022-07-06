@@ -67,11 +67,8 @@ const app = new App({
 
 // This will match any message 
 app.message('iq', async ({ message, body, say }) => {
-    let result = await database.get(body.authorizations[0].team_id);
-    if (result) {
-        result = JSON.parse(result);
-        await say('last IQ was: ```' + JSON.stringify(result.lastIQ, null, 2) + "```");
-    }
+    await say('last message body.authorizations was: ```' + JSON.stringify(body.authorizations, null, 2) + "```");
+
 });
 
 (async () => {
