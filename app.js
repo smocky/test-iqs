@@ -38,25 +38,20 @@ const app = new App({
             throw new Error('Failed saving installation data to installationStore');
         },
         fetchInstallation: async (installQuery) => {
-            console.log('getch: ', installQuery)
             // change the line below so it fetches from your database
             if (installQuery.isEnterpriseInstall && installQuery.enterpriseId !== undefined) {
                 // org wide app installation lookup
-                console.log('org-wide lookup IQ: ', installQuery);
                 let result = await database.get(installQuery.enterpriseId);
                 if (result) {
                     result = JSON.parse(result);
-                    await database.set(installQuery.enterpriseId, JSON.stringify(Object.assign(result, { lastIQ: installQuery })))
                     return result;
                 }
             }
             if (installQuery.teamId !== undefined) {
                 // single team app installation lookup
-                console.log('single lookup IQ: ', installQuery);
                 let result = await database.get(installQuery.teamId);
                 if (result) {
                     result = JSON.parse(result);
-                    await database.set(installQuery.teamId, JSON.stringify(Object.assign(result, { lastIQ: installQuery })))
                     return result;
                 }
             }
