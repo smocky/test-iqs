@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@slack/bolt": "^3.3.0",
-    "async-redis": "^1.1.7",
+    "@slack/bolt": "^3.11.3",
+    "async-redis": "^2.0.0",
     "dotenv": "^10.0.0",
     "redis": "^3.1.2"
   }

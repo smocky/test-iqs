@@ -1,6 +1,13 @@
 require('dotenv').config();
-const asyncRedis = require("async-redis");
-const database = asyncRedis.createClient(process.env.REDIS_URL);
+const redis = require("redis");
+// Production Redis DB
+const database = redis.createClient({
+    url: process.env.REDIS_URL,
+    socket: {
+        tls: true,
+        rejectUnauthorized: false
+    }
+});
 
 const { App } = require('@slack/bolt');
 
@@ -8,10 +15,15 @@ const app = new App({
     signingSecret: process.env.SLACK_SIGNING_SECRET,
     clientId: process.env.SLACK_CLIENT_ID,
     clientSecret: process.env.SLACK_CLIENT_SECRET,
-    //appToken: process.env.APP_TOKEN,
-   // developerMode: true,
+    appToken: process.env.SLACK_APP_TOKEN,
+    authVersion: 'v2',
+    developerMode: true,
+    socketMode: true,
     stateSecret: 'my-state-secret',
     scopes: ['channels:read', 'groups:read', 'channels:manage', 'chat:write', 'channels:history'],
+    installerOptions: {
+        stateVerification: false,
+    },
     installationStore: {
         storeInstallation: async (installation) => {
             // change the line below so it saves to your database
@@ -19,7 +31,7 @@ const app = new App({
                 // support for org wide app installation
                 console.log('enterprise install');
                 // return installation;
-                return await database.set(installation.enterprise.id, installation);
+                return await database.set(installation.enterprise.id, JSON.stringify(installation));
             } else {
                 // single team app installation
                 console.log('normal install');
